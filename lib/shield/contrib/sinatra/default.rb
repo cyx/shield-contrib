@@ -22,8 +22,8 @@ module Shield
             super
           end
 
-          def logout(model = User)
-            super
+          def authenticated?(model = User)
+            authenticated(model)
           end
         end
 
@@ -41,7 +41,7 @@ module Shield
         end
 
         m.get "/logout" do
-          logout
+          logout(User)
           redirect settings.shield_redirect_after_logout
         end
       end
