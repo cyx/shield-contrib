@@ -33,10 +33,10 @@ module Shield
 
         m.post "/login" do
           if login(User, params[:username], params[:password])
-            redirect settings.shield_redirect_after_login
+            redirect_to_stored(settings.shield_redirect_after_login)
           else
             session[:error] = settings.shield_auth_failure
-            redirect "/login"
+            redirect_to_login
           end
         end
 
