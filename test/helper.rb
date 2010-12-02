@@ -1,8 +1,6 @@
 $:.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 
-puts "!! REMOVE THIS IN LINE: #{__LINE__} of #{__FILE__}"
-$:.unshift("/Users/cyx/Labs/shield/lib")
-
+require "shield"
 require "shield/contrib"
 require "spawn"
 require "ohm"
