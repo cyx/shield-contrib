@@ -1,6 +1,6 @@
 module Shield
   module Contrib
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
   end
 
   autoload :Ohm,     "shield/contrib/ohm"
