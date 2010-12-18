@@ -14,7 +14,9 @@ module Shield
 
       module Fetch
         def fetch(email)
-          find(:email => email).first
+          return if email.to_s.empty?
+
+          find(:email => email.downcase.strip).first
         end
       end
 
@@ -31,6 +33,10 @@ module Shield
         unless password.to_s.empty?
           assert password == password_confirmation, [:password, :not_confirmed]
         end
+      end
+
+      def email
+        read_local(:email).to_s.downcase.strip
       end
 
       def password=(password)
