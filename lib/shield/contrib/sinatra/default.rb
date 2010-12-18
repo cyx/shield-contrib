@@ -6,8 +6,6 @@ module Shield
         m.set :shield_redirect_after_logout, "/"
         m.set :shield_auth_failure, "Wrong Username and/or Password combination."
 
-        m.enable :sessions
-
         m.helpers Shield::Helpers
         m.helpers do
           def current_user
