@@ -4,7 +4,8 @@ module Shield
       def self.included(model)
         model.extend Shield::Model
         model.extend Fetch
-        model.attribute :email
+
+        model.attributes << :email unless model.attributes.include?(:email)
         model.index :email
 
         model.attribute :crypted_password
@@ -20,6 +21,14 @@ module Shield
         end
       end
 
+      def email=(email)
+        write_local(:email, email.to_s.downcase.strip)
+      end
+
+      def email
+        read_local(:email)
+      end
+
       attr_reader   :password
       attr_accessor :password_confirmation
 
@@ -33,10 +42,6 @@ module Shield
         unless password.to_s.empty?
           assert password == password_confirmation, [:password, :not_confirmed]
         end
-      end
-
-      def email
-        read_local(:email).to_s.downcase.strip
       end
 
       def password=(password)
