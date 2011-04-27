@@ -41,7 +41,7 @@ scope do
     assert_redirected_to "/dashboard"
     follow_redirect!
 
-    assert "Dashboard" == last_response.body
+    assert_equal "Dashboard", last_response.body
   end
 
   test "GET /logout" do

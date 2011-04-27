@@ -19,10 +19,13 @@ class Cutest::Scope
   include Rack::Test::Methods
 
   def assert_redirected_to(path)
-    assert 302  == last_response.status
-    assert path == last_response.headers["Location"]
-  end
+    assert_equal 302, last_response.status
 
+    fullpath = last_response.headers["Location"].
+      gsub(%r{^http://([^/]+)}, "")
+
+    assert_equal path, fullpath
+  end
 
   def session
     last_request.env["rack.session"]

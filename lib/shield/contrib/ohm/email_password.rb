@@ -35,7 +35,7 @@ module Shield
       def validate
         super
 
-        assert_present(:email) && assert_email(:email) && assert_unique(:email)
+        assert_present(:email) && assert_email(:email) && assert_unique_email(:email)
 
         assert_present(:password) if new?
 
@@ -53,6 +53,10 @@ module Shield
       end
 
     private
+      def assert_unique_email(att, error = [att, :not_unique])
+        assert_unique(att, error)
+      end
+
       def assert_email(att, error = [att, :not_email])
         assert_format(att, EMAIL_REGEX, error)
       end
